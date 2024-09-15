@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: rgb(191, 169, 245);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#recommendations {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #ecf0d3;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Movie Recommendation System</h1>
+        <p>Enter your preferred genre to get movie recommendations.</p>
+
+        <input type="text" id="genreInput" placeholder="Enter genre (e.g., Action, Comedy)">
+        <button id="recommendButton">Get Recommendations</button>
+
+        <div id="recommendations">
+            <h2>Recommended Movies:</h2>
+            <ul id="movieList"></ul>
+        </div>
+    </div>
+
+    <script >
+const movies = [
+    { title: "Inception", genre: "Action", director: "Christopher Nolan" },
+    { title: "The Dark Knight", genre: "Action", director: "Christopher Nolan" },
+    { title: "Pulp Fiction", genre: "Crime", director: "Quentin Tarantino" },
+    { title: "The Godfather", genre: "Crime", director: "Francis Ford Coppola" },
+    { title: "Forrest Gump", genre: "Drama", director: "Robert Zemeckis" },
+    { title: "The Grand Budapest Hotel", genre: "Comedy", director: "Wes Anderson" },
+    { title: "Interstellar", genre: "Sci-Fi", director: "Christopher Nolan" },
+    { title: "The Matrix", genre: "Sci-Fi", director: "Wachowski Brothers" },
+    { title: "Avengers: Endgame", genre: "Action", director: "Russo Brothers" },
+    { title: "La La Land", genre: "Musical", director: "Damien Chazelle" }
+];
+
+const genreInput = document.getElementById("genreInput");
+const recommendButton = document.getElementById("recommendButton");
+const movieList = document.getElementById("movieList");
+
+
+function getRecommendations(genre) {
+    return movies.filter(movie => movie.genre.toLowerCase() === genre.toLowerCase());
+}
+
+function displayRecommendations(recommendations) {
+    movieList.innerHTML = ""; 
+    if (recommendations.length === 0) {
+        movieList.innerHTML = "<li>No movies found for the given genre.</li>";
+    } else {
+        recommendations.forEach(movie => {
+            const li = document.createElement("li");
+            li.textContent = `${movie.title} (${movie.genre}) - Directed by ${movie.director}`;
+            movieList.appendChild(li);
+        });
+    }
+}
+
+recommendButton.addEventListener("click", () => {
+    const genre = genreInput.value.trim();
+    if (genre === "") {
+        alert("Please enter a genre.");
+        return;
+    }
+    const recommendations = getRecommendations(genre);
+    displayRecommendations(recommendations);
+});
+
+    </script>
+</body>
+</html>
