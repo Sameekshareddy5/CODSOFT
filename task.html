@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+.top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            /* Optional styling */
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+.chat-container {
+    width: 300px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #9bf2f8;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box {
+    height: 300px;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #9bf2f8;
+}
+
+.chat-box div {
+    margin: 10px 0;
+}
+
+input[type="text"] {
+    width: calc(100% - 60px);
+    padding: 15px;
+    border: px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+</style>
+<body>
+    <div class="top-right"></div>
+        CHATBOT
+    </div>
+
+        </div>
+    </div>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="send-btn">Send</button>
+    </div>
+
+    <script>
+        document.getElementById("send-btn").addEventListener("click", function() {
+    const userInput = document.getElementById("user-input").value;
+    addMessage("You: " + userInput);
+    document.getElementById("user-input").value = '';
+    generateResponse(userInput);
+});
+
+function addMessage(message) {
+    const chatBox = document.getElementById("chat-box");
+    const messageDiv = document.createElement("div");
+    messageDiv.textContent = message;
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to bottom
+}
+
+function generateResponse(input) {
+    let response;
+    input = input.toLowerCase(); // Normalize input
+
+    if (input.includes("hello") || input.includes("hi")) {
+        response = "Hello! How can I assist you today?";
+    } else if (input.includes("how are you")) {
+        response = "I'm just a bunch of code, but I'm doing great! How about you?";
+    } else if (input.includes("help")) {
+        response = "Sure! What do you need help with?";
+    } else if (input.includes("bye")) {
+        response = "Goodbye! Have a great day!";
+    } else {
+        response = "I'm not sure how to respond to that.";
+    }
+
+    addMessage("Bot: " + response);
+}
+
+    </script>
+</body>
+</html>
